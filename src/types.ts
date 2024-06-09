@@ -1,5 +1,7 @@
 export type gender = 'male' | 'female' | 'other';
 
+export type NewPatient = Omit<Patient, 'id'>;
+
 export interface Diagnosis {
     code: string,
     name: string,
