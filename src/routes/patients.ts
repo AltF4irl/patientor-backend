@@ -1,15 +1,21 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-import express from "express";
+import express from 'express';
 const router = express.Router();
-import patientService from "../services/patientService";
+import patientService from '../services/patientService';
+import toNewPatient from '../utils';
 
 router.get('/', (_req, res) => {
-    res.json(patientService.getPatientsWithoutSsn());
+  res.json(patientService.getPatientsWithoutSsn());
 });
 
 router.post('/', (req, res) => {
-    const newEntry = patientService.addPatient(req.body);
+  try {
+    const newEntry = patientService.addPatient(toNewPatient(req.body));
     res.json(newEntry);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      res.status(400).json({ error: err.message });
+    }
+  }
 });
 
 export default router;
