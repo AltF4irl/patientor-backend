@@ -12,11 +12,16 @@ export interface Diagnosis {
     latin?: string
 }
 
+export interface Entry {}
+
 export interface Patient {
-    id: string,
-    name: string,
-    dateOfBirth: string,
-    ssn: string,
-    gender: Gender,
-    occupation: string
+    id: string;
+    name: string;
+    dateOfBirth: string;
+    ssn: string;
+    gender: Gender;
+    occupation: string;
+    entries: Entry[]
 }
+
+export type NonSensitivePatient = Omit<Patient, 'ssn' | 'entries'>;
