@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 import patientService from '../services/patientService';
 import toNewPatient from '../utils';
-import { Entry, Patient } from '../types';
+import { NewEntry, Patient } from '../types';
 
 router.get('/', (_req, res) => {
   res.json(patientService.getPatientsWithoutSsn());
@@ -21,8 +21,8 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/:id/entries', (req, res) => {
-  const entry = req.body as Entry;
-  if (!entry.type || !entry.date || !entry.description || !entry.id || !entry.specialist) {
+  const entry = req.body as NewEntry;
+  if (!entry.type || !entry.date || !entry.description || !entry.specialist) {
     console.log(1);
     res.status(400).json({error: "missing information"});
   }
