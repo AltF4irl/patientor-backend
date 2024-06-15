@@ -24,7 +24,7 @@ router.post('/:id/entries', (req, res) => {
   const entry = req.body as NewEntry;
   if (!entry.type || !entry.date || !entry.description || !entry.specialist) {
     console.log(1);
-    res.status(400).json({error: "missing information"});
+    return res.status(400).json({error: "missing information"});
   }
   switch (entry.type) {
     case ('HealthCheck'): {
